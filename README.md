@@ -35,4 +35,4 @@ Screenshots
   Small size
 
 ![smallsize1](https://github.com/user-attachments/assets/6d391962-41d4-43dd-a820-e7c10c34e8c4)
-![smallsize2](https://github.com/user-attachments/assets/3cb6a16b-cf92-4f2a-a94f-b9dbca75400d)
+![smallsize2](https://github.com/user-attachments/assets/1a12cf9f-50eb-4314-a314-9085ed031ac3)
