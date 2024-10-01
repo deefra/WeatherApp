@@ -27,3 +27,12 @@ Screenshots
   Full size
   
 ![fullsize](https://github.com/user-attachments/assets/954c03f5-3587-4fa7-ae00-7077f3e52c1e)
+
+  Half size
+
+![halfsize](https://github.com/user-attachments/assets/b10c5890-17a0-4068-8156-636ead082fb0)
+
+  Small size
+
+![smallsize1](https://github.com/user-attachments/assets/5bd8fb76-5d06-430b-a2e8-fa638fea6997)
+![smallsize2](https://github.com/user-attachments/assets/dc86b02f-7425-486b-b74d-a1e1135c02fc)
