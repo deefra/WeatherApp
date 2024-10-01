@@ -1,4 +1,4 @@
-const apiKey = 'be239583751f1a66f092c975aa7aa259';
+const apiKey = '';
 const input = document.getElementById("cityInput");
 let markers = [];
 
@@ -221,7 +221,7 @@ function displayWeather(data){
 
 
 async function reverseGeocode(lat, lon) {
-  const mapApi = '032c967501924b3d84881defde3533d5';
+  const mapApi = '';
   const apiUrl = `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lon}&key=${mapApi}`;
 
   try {
