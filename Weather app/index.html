@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <title>Weather</title>
+
+</head>
+<body class="bg-neutral-900 text-white">
+
+    <!-- NAVBAR -->
+
+    <nav class="mt-5 mx-[3rem] flex justify-between items-center">
+        <div>
+            <h1 class="md:text-2xl pr-1">Weather</h1>
+        </div>
+        <div class="">
+            <input id="cityInput" class="px-5 xl:w-[32rem] xl:h-[50px] h-[50px] rounded-full bg-zinc-800 focus:outline-none focus:ring focus:outline-zinc-800" placeholder="Search city..." type="text" autocomplete="off">
+        </div>
+        <div>
+            <h1 class="text-2xl hidden md:block">Github</h1>
+        </div>
+    </nav>
+
+    <div class="md:flex mt-[5rem] justify-center">
+        <div class="bg-zinc-800 rounded-xl p-5 md:mr-[1px] lg:min-w-[20rem] md:ml-5 sm:mx-4 md:mx-auto">
+            <h1 class="text-zinc-200">Today</h1>
+            <div class="grid grid-cols-2 text-zinc-300">
+                <div class="pt-10">
+                    <h1 id="temperature" class="text-5xl text-zinc-200"></h1>
+                    <p id="description" class="text-sm mt-2 "></p>
+                </div>
+                <div class="">
+                    <img id="weatherIcon" src="" alt="weather icon">
+                </div>
+            </div>
+            <hr class="border-zinc-700 w-5/6 mx-auto m-5">
+            <div class="text-zinc-400">
+                <p id="date"></p>
+                <p class="text-zinc-200 text-2xl" id="city"></p>
+            </div>
+        </div>
+        <div class="bg-zinc-800 md:min-w-[22rem] rounded-xl p-4 xl:w-[65rem] sm:mx-[1rem]">
+            <p class="text-zinc-300">Todays Highlights</p>
+            <div class="xl:grid xl:grid-cols-2 p-2 text-zinc-400">
+                <div class="xl:p-1 mb-5">
+                    <h1>Sunrise & Sunset</h1>
+                    <div class="grid grid-cols-2 mt-[5rem] text-zinc-400">
+                        <div class="flex">
+                            <svg class="w-10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12 17.75C10.8628 17.75 9.75106 17.4128 8.80547 16.781C7.85989 16.1491 7.1229 15.2511 6.6877 14.2004C6.25249 13.1498 6.13862 11.9936 6.36049 10.8782C6.58235 9.76284 7.12999 8.73829 7.93414 7.93414C8.73829 7.12999 9.76284 6.58235 10.8782 6.36049C11.9936 6.13862 13.1498 6.25249 14.2004 6.6877C15.2511 7.1229 16.1491 7.85989 16.781 8.80547C17.4128 9.75106 17.75 10.8628 17.75 12C17.7474 13.5242 17.1407 14.9852 16.0629 16.0629C14.9852 17.1407 13.5242 17.7474 12 17.75ZM12 7.75C11.1594 7.75 10.3377 7.99926 9.63883 8.46626C8.93992 8.93325 8.39519 9.59701 8.07351 10.3736C7.75184 11.1502 7.66768 12.0047 7.83167 12.8291C7.99565 13.6536 8.40043 14.4108 8.9948 15.0052C9.58917 15.5996 10.3464 16.0044 11.1709 16.1683C11.9953 16.3323 12.8498 16.2482 13.6264 15.9265C14.403 15.6048 15.0668 15.0601 15.5337 14.3612C16.0007 13.6623 16.25 12.8406 16.25 12C16.2474 10.8736 15.7987 9.79417 15.0023 8.99772C14.2058 8.20126 13.1264 7.75264 12 7.75Z" fill="#ffffff"></path> <path d="M12 5C11.8019 4.99741 11.6126 4.91756 11.4725 4.77747C11.3324 4.63737 11.2526 4.44811 11.25 4.25V2.75C11.25 2.55109 11.329 2.36032 11.4697 2.21967C11.6103 2.07902 11.8011 2 12 2C12.1989 2 12.3897 2.07902 12.5303 2.21967C12.671 2.36032 12.75 2.55109 12.75 2.75V4.25C12.7474 4.44811 12.6676 4.63737 12.5275 4.77747C12.3874 4.91756 12.1981 4.99741 12 5Z" fill="#ffffff"></path> <path d="M12 22C11.8019 21.9974 11.6126 21.9176 11.4725 21.7775C11.3324 21.6374 11.2526 21.4481 11.25 21.25V19.75C11.25 19.5511 11.329 19.3603 11.4697 19.2197C11.6103 19.079 11.8011 19 12 19C12.1989 19 12.3897 19.079 12.5303 19.2197C12.671 19.3603 12.75 19.5511 12.75 19.75V21.25C12.7474 21.4481 12.6676 21.6374 12.5275 21.7775C12.3874 21.9176 12.1981 21.9974 12 22Z" fill="#ffffff"></path> <path d="M21.25 12.75H19.75C19.5511 12.75 19.3603 12.671 19.2197 12.5303C19.079 12.3897 19 12.1989 19 12C19 11.8011 19.079 11.6103 19.2197 11.4697C19.3603 11.329 19.5511 11.25 19.75 11.25H21.25C21.4489 11.25 21.6397 11.329 21.7803 11.4697C21.921 11.6103 22 11.8011 22 12C22 12.1989 21.921 12.3897 21.7803 12.5303C21.6397 12.671 21.4489 12.75 21.25 12.75Z" fill="#ffffff"></path> <path d="M4.25 12.75H2.75C2.55109 12.75 2.36032 12.671 2.21967 12.5303C2.07902 12.3897 2 12.1989 2 12C2 11.8011 2.07902 11.6103 2.21967 11.4697C2.36032 11.329 2.55109 11.25 2.75 11.25H4.25C4.44891 11.25 4.63968 11.329 4.78033 11.4697C4.92098 11.6103 5 11.8011 5 12C5 12.1989 4.92098 12.3897 4.78033 12.5303C4.63968 12.671 4.44891 12.75 4.25 12.75Z" fill="#ffffff"></path> <path d="M6.50001 7.24995C6.30707 7.2352 6.12758 7.14545 6.00001 6.99995L4.91001 5.99995C4.83844 5.92838 4.78167 5.84341 4.74293 5.7499C4.7042 5.65639 4.68427 5.55617 4.68427 5.45495C4.68427 5.35373 4.7042 5.25351 4.74293 5.16C4.78167 5.06649 4.83844 4.98152 4.91001 4.90995C4.98158 4.83838 5.06655 4.78161 5.16006 4.74287C5.25357 4.70414 5.3538 4.6842 5.45501 4.6842C5.55623 4.6842 5.65645 4.70414 5.74996 4.74287C5.84347 4.78161 5.92844 4.83838 6.00001 4.90995L7.00001 5.99995C7.123 6.13746 7.19099 6.31547 7.19099 6.49995C7.19099 6.68443 7.123 6.86244 7.00001 6.99995C6.87244 7.14545 6.69295 7.2352 6.50001 7.24995Z" fill="#ffffff"></path> <path d="M18.56 19.31C18.4615 19.3104 18.3638 19.2912 18.2728 19.2534C18.1818 19.2157 18.0993 19.1601 18.03 19.09L17 18C16.9332 17.86 16.9114 17.7028 16.9376 17.5499C16.9638 17.3971 17.0368 17.2561 17.1465 17.1464C17.2561 17.0368 17.3971 16.9638 17.55 16.9376C17.7028 16.9113 17.8601 16.9331 18 17L19.09 18C19.2305 18.1406 19.3094 18.3312 19.3094 18.53C19.3094 18.7287 19.2305 18.9194 19.09 19.06C19.0233 19.1355 18.9419 19.1967 18.8508 19.2397C18.7597 19.2827 18.6607 19.3066 18.56 19.31Z" fill="#ffffff"></path> <path d="M17.5 7.24995C17.3071 7.2352 17.1276 7.14545 17 6.99995C16.877 6.86244 16.809 6.68443 16.809 6.49995C16.809 6.31547 16.877 6.13746 17 5.99995L18 4.90995C18.1445 4.76541 18.3406 4.6842 18.545 4.6842C18.7494 4.6842 18.9455 4.76541 19.09 4.90995C19.2345 5.05449 19.3158 5.25054 19.3158 5.45495C19.3158 5.65936 19.2345 5.85541 19.09 5.99995L18 6.99995C17.8724 7.14545 17.6929 7.2352 17.5 7.24995Z" fill="#ffffff"></path> <path d="M5.44001 19.31C5.34147 19.3104 5.24383 19.2912 5.15282 19.2534C5.06181 19.2157 4.97926 19.1601 4.91001 19.09C4.76956 18.9494 4.69067 18.7587 4.69067 18.56C4.69067 18.3612 4.76956 18.1706 4.91001 18.03L6.00001 17C6.13997 16.9331 6.2972 16.9113 6.45006 16.9376C6.60293 16.9638 6.7439 17.0368 6.85357 17.1464C6.96324 17.2561 7.03621 17.3971 7.06244 17.5499C7.08866 17.7028 7.06685 17.86 7.00001 18L6.00001 19.09C5.92728 19.1638 5.83985 19.2216 5.74338 19.2595C5.64691 19.2974 5.54356 19.3146 5.44001 19.31Z" fill="#ffffff"></path> </g></svg>
+                            <div class="ml-3">
+                                <h1 class="pb-2">Sunrise</h1>
+                                <h1 id="sunrise" class="text-zinc-300"></h1>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex">
+                                <svg class="w-10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M3.32031 11.6835C3.32031 16.6541 7.34975 20.6835 12.3203 20.6835C16.1075 20.6835 19.3483 18.3443 20.6768 15.032C19.6402 15.4486 18.5059 15.6834 17.3203 15.6834C12.3497 15.6834 8.32031 11.654 8.32031 6.68342C8.32031 5.50338 8.55165 4.36259 8.96453 3.32996C5.65605 4.66028 3.32031 7.89912 3.32031 11.6835Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                                <div class="ml-3">
+                                    <h1 class="pb-2">Sunset</h1>
+                                    <h1 id="sunset" class="text-zinc-300"></h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between">
+                        <h1>Air quality index</h1>
+                        <h1 class="rounded-xl" id="aqi"></h1>
+                    </div>
+                    <div class="mt-[4rem]">
+                        <div class="grid grid-cols-5">
+                            <div>
+                                <svg class="w-[4rem]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M8 12H14M5 9H16.5C17.8807 9 19 7.88071 19 6.5C19 5.11929 17.8807 4 16.5 4M4 15H17C18.1046 15 19 15.8954 19 17C19 18.1046 18.1046 19 17 19" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                            </div>
+                            <div>
+                                <h1>PM2.5</h1>
+                                <h1 class="text-zinc-200" id="pm2_5"></h1>
+                            </div>
+                            <div>
+                                <h1>SO2</h1>
+                                <h1 class="text-zinc-200" id="so2"></h1>
+                            </div>
+                            <div>
+                                <h1>No2</h1>
+                                <h1 class="text-zinc-200" id="no2"></h1>
+                            </div>
+                            <div>
+                                <h1>O3</h1>
+                                <h1 class="text-zinc-200" id="o3"></h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <div>
+
+            </div>
+        </div>
+            <div class="grid grid-cols-4 p-2 text-zinc-400">
+               <div>
+                    <h1 class="p-1 mb-5">Humidity</h1>
+                    <div class="grid grid-cols-2">
+                        <svg class="w-7 h-8" xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" width="300" height="300" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs"><g transform="matrix(1,0,0,1,0,0)"><path d="M12,24A10,10,0,0,1,4.929,6.929L12,.013l7.063,6.908a10.014,10.014,0,0,1,.008,14.15h0A9.936,9.936,0,0,1,12,24ZM12,2.811,6.335,8.351a8,8,0,1,0,11.322-.008ZM9,10a1,1,0,1,0,1,1A1,1,0,0,0,9,10Zm6,6a1,1,0,1,0,1,1A1,1,0,0,0,15,16ZM8.434,18h2.332l4.8-8H13.234Z" fill="#ffffff" fill-opacity="1" data-original-color="#000000ff" stroke="none" stroke-opacity="1"/></g></svg>
+                        <h1 id="humidity" class="text-zinc-300 text-1xl"></h1>
+                    </div>
+               </div>
+               <div>
+                    <h1 class="p-1 mb-5">Pressure</h1>
+                    <div class="grid grid-cols-2">
+                        <svg class="w-7 h-8" xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" width="300" height="300" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs"><g transform="matrix(1,0,0,1,0,0)"><path d="M16,13a5.518,5.518,0,0,1-2.391-.546,6.5,6.5,0,0,1-5.481-.137A5.586,5.586,0,0,1,1.505,11.28a5.452,5.452,0,0,1-1.5-4.087A5.606,5.606,0,0,1,2.967,2.677a5.1,5.1,0,0,1,3.3-.618,6.523,6.523,0,0,1,9.356-.131,6.075,6.075,0,0,1,4.618,2.078,4.051,4.051,0,0,1,1.175.255h0a4,4,0,0,1-2.149,7.668A5.45,5.45,0,0,1,16,13ZM13.614,9.41a2.609,2.609,0,0,1,1.219.3,2.531,2.531,0,0,0,2.738-.267c.037-.036.087-.1.141-.166a1.5,1.5,0,0,1,1.843-.395.959.959,0,0,0,1.222-.254.993.993,0,0,0-.422-1.562h0a.975.975,0,0,0-.562-.046,1.5,1.5,0,0,1-1.615-.736A2.5,2.5,0,0,0,16,5a3.388,3.388,0,0,1-2.513-.963,3.509,3.509,0,0,0-5.149.2,2.472,2.472,0,0,1-2.39.81,2.087,2.087,0,0,0-1.535.257A2.591,2.591,0,0,0,3,7.356,2.489,2.489,0,0,0,6.8,9.618a2.44,2.44,0,0,1,2.51-.069,3.455,3.455,0,0,0,3.2.11A2.548,2.548,0,0,1,13.614,9.41ZM14,22.5A1.5,1.5,0,0,0,12.5,21H1.5a1.5,1.5,0,0,0,0,3h11A1.5,1.5,0,0,0,14,22.5Zm7,0A1.5,1.5,0,0,0,19.5,21h-2a1.5,1.5,0,0,0,0,3h2A1.5,1.5,0,0,0,21,22.5Zm3-5A1.5,1.5,0,0,0,22.5,16h-11a1.5,1.5,0,0,0,0,3h11A1.5,1.5,0,0,0,24,17.5Zm-16,0A1.5,1.5,0,0,0,6.5,16h-2a1.5,1.5,0,0,0,0,3h2A1.5,1.5,0,0,0,8,17.5Z" fill="#ffffff" fill-opacity="1" data-original-color="#000000ff" stroke="none" stroke-opacity="1"/></g></svg>
+                        <h1 id="pressure" class="text-zinc-300"></h1>
+                    </div>
+               </div>
+               <div>
+                    <h1>Feels like</h1>
+                    <div class="grid grid-cols-2 pt-7">
+                        <svg class="w-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M8 15.9998C7.44772 15.9998 7 16.4475 7 16.9998C7 17.5521 7.44772 17.9998 8 17.9998C8.55228 17.9998 9 17.5521 9 16.9998C9 16.4475 8.55228 15.9998 8 15.9998ZM8 15.9998L8.00707 12M8 16.9998L8.00707 17.0069M20 5C20 6.10457 19.1046 7 18 7C16.8954 7 16 6.10457 16 5C16 3.89543 16.8954 3 18 3C19.1046 3 20 3.89543 20 5ZM12 16.9998C12 19.209 10.2091 20.9998 8 20.9998C5.79086 20.9998 4 19.209 4 16.9998C4 15.9854 4.37764 15.0591 5 14.354L5 6C5 4.34315 6.34315 3 8 3C9.65685 3 11 4.34315 11 6V14.354C11.6224 15.0591 12 15.9854 12 16.9998Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                        <h1 id="feelsLike" class="text-zinc-300"></h1>
+                    </div>
+               </div>
+               <div>
+                    <h1>Visibility</h1>
+                    <div class="grid grid-cols-2 pt-7">
+                        <svg class="w-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M15.0007 12C15.0007 13.6569 13.6576 15 12.0007 15C10.3439 15 9.00073 13.6569 9.00073 12C9.00073 10.3431 10.3439 9 12.0007 9C13.6576 9 15.0007 10.3431 15.0007 12Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M12.0012 5C7.52354 5 3.73326 7.94288 2.45898 12C3.73324 16.0571 7.52354 19 12.0012 19C16.4788 19 20.2691 16.0571 21.5434 12C20.2691 7.94291 16.4788 5 12.0012 5Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                        <h1 id="visibility" class="text-zinc-300"></h1>
+                    </div>
+               </div>
+            </div>
+        </div>
+        <div class="min-w-[20rem] h-[%100] min-h-[200px] sm:mx-5 md=:mr-5 md:mx-0 mt-2 md:mt-0 rounded-xl" id="map"></div>
+    </div>
+    <script src="app.js"></script>
+    
+</body>
+</html>
