@@ -26,4 +26,4 @@ Screenshots
 
   Full size
   
-![alt text]([http://url/to/img.png](https://ibb.co/xfy3gVB))
+![fullsize](https://github.com/user-attachments/assets/954c03f5-3587-4fa7-ae00-7077f3e52c1e)
