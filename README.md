@@ -21,3 +21,9 @@ Usage
  - Open the app in your browser.
  - Click anywhere on the map or type out the city/country to fetch and display weather data for that location.
  - View real-time weather information including temperature, humidity, air quality, visibility, and more.
+
+Screenshots
+
+  Full size
+  
+![alt text]([http://url/to/img.png](https://ibb.co/xfy3gVB))
